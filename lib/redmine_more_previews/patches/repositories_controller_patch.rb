@@ -26,7 +26,6 @@ module RedmineMorePreviews
       def self.included(base)
         
         base.class_eval do
-          #unloadable
             
          prepend ClassMethods
             

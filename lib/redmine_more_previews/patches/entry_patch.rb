@@ -27,7 +27,6 @@ module RedmineMorePreviews
     module EntryPatch
       def self.included(base)
         base.class_eval do
-          #unloadable
           
           def convertible?
             RedmineMorePreviews::Converter.convertible?(name)
