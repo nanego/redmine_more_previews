@@ -1,5 +1,4 @@
-unless Gem::Specification.all_names.any?{|gem| gem =~ /rubyzip/}
-  gem 'rubyzip'
-end
+# The rubyzip gem is already present in the main Gemfile since Redmine 4.2.0
+# gem 'rubyzip'
 
 gem 'zlib'
