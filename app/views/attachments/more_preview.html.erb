@@ -8,7 +8,7 @@
 <%= render :layout => 'layouts/file' do %>
   <div>
     <p class="contextual">
-      <%= link_to l(:button_update), reloadpath, :class => "icon icon-reload" %>
+      <%= link_to sprite_icon('reload', l(:button_update)), reloadpath %>
       <%= call_hook(:preview_attachment_contextual, :attachment => @attachment, :project => @project ) %>
     </p>
   </div><div style="clear:both;"></div>

@@ -21,7 +21,7 @@
 
 <div>
   <p class="contextual">
-    <%= link_to l(:button_update), reloadpath, :class => "icon icon-reload" %>
+    <%= link_to sprite_icon('reload', l(:button_update)), reloadpath %>
     <%= call_hook(:preview_repository_entry_contextual, :repository => @repository, :path => @path, :rev => @rev, :entry => @entry, :project => @project ) %>
   </p>
 </div><div style="clear:both;"></div>

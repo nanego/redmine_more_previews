@@ -15,7 +15,7 @@
       <%= radio_button_tag 'settings[embedding]', 1, (settings["embedding"] == "1" ) %>
   </p>
   <p>
-    <a class='icon icon-help' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_redmine_more_previews_embed_settings").toggle(); return false;'><%= l(:label_help) %></a>
+    <a class='icon' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_redmine_more_previews_embed_settings").toggle(); return false;'><%= sprite_icon('help', l(:label_help)) %></a>
     <br>
     <span id="help_redmine_more_previews_embed_settings" class="info" style="display: none;">
       <em class="info"><%= l(:text_help_redmine_more_previews_embed_settings) %></em>
@@ -26,7 +26,7 @@
       <%= check_box_tag 'settings[absolute]', 1, (settings["absolute"] == "1" ) %>
   </p>
   <p>
-    <a class='icon icon-help' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_redmine_more_previews_absolute").toggle(); return false;'><%= l(:label_help) %></a>
+    <a class='icon' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_redmine_more_previews_absolute").toggle(); return false;'><%= sprite_icon('help', l(:label_help)) %></a>
     <br>
     <span id="help_redmine_more_previews_absolute" class="info" style="display: none;">
       <em class="info"><%= l(:text_help_redmine_more_previews_absolute) %></em>
@@ -40,7 +40,7 @@
       <%= check_box_tag 'settings[cache_previews]', 1, (settings["cache_previews"] == "1" ) %>
   </p>
   <p>
-    <a class='icon icon-help' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_redmine_more_previews_cache").toggle(); return false;'><%= l(:label_help) %></a>
+    <a class='icon' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_redmine_more_previews_cache").toggle(); return false;'><%= sprite_icon('help', l(:label_help)) %></a>
     <br>
     <span id="help_redmine_more_previews_cache" class="info" style="display: none;">
       <em class="info"><%= l(:text_help_redmine_more_previews_cache) %></em>
@@ -54,7 +54,7 @@
       <%= check_box_tag 'settings[debug]', 1, (settings["debug"] == "1" ) %>
   </p>
   <p>
-    <a class='icon icon-help' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_redmine_more_previews_debug").toggle(); return false;'><%= l(:label_help) %></a>
+    <a class='icon' href='#' title='<%= "#{l(:label_help)}" %>' onclick='$("#help_redmine_more_previews_debug").toggle(); return false;'><%= sprite_icon('help', l(:label_help)) %></a>
     <br>
     <span id="help_redmine_more_previews_debug" class="info" style="display: none;">
       <em class="info"><%= l(:text_help_redmine_more_previews_debug) %></em>
@@ -75,7 +75,7 @@
       <%= render :partial => converter.settings[:partial], :locals => {:settings => converter.settings[:default].to_h.merge(settings.dig("converter", "#{converter.id}").to_h).stringify_keys} %>
       <% status = RedmineMorePreviews::Converter.find(converter.id).worker.check %>
       <% if status; label,result = status %>
-      <p><%= label.is_a?(Symbol) ? l(label) : label %> <span class="icon-only <%= (result ? 'icon-ok' : 'icon-error') %>"></span></p>
+      <p><%= label.is_a?(Symbol) ? l(label) : label %> <span class="icon-only <%= (result ? 'icon-ok' : 'icon-error') %>"><%= sprite_icon(result ? 'checked' : 'close') %></span></p>
       <% end %>
     </div>
     <hr>

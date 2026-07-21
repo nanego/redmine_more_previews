@@ -1,4 +1,11 @@
 <style>
+/* Base positioning for legacy raster file-type icons (removed from Redmine 7.0 core).
+   Scoped to elements without an SVG icon so it never affects sprite icons. */
+.icon:not(:has(svg)) {
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+  padding-left: 20px;
+}
 <% RedmineMorePreviews::Converter.active_mime_types.to_h.each do |ext, values| %>
 <% if s = values['icon'] %>
 <% converter = RedmineMorePreviews::Converter.find values['converter'] %>
