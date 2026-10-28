@@ -43,8 +43,10 @@ module RedmineMorePreviews
         def info
          super
          RedmineMorePreviews::Converter.all.each do |converter|
+           next if converter.id == :nil_text # example converter, always "available"
            check = converter.worker.check
-           @checklist << check if check
+           # skip checks already listed by Redmine core (pandoc, convert)
+           @checklist << check if check && @checklist.none? { |label, _| label == check.first }
          end
         end #def
         
