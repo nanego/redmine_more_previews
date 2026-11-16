@@ -21,7 +21,6 @@
 #
 
 require "timeout"
-require "benchmark"
 
 module RedmineMorePreviews
   module Modules
@@ -95,8 +94,9 @@ module RedmineMorePreviews
        end
        
        def log(command, &block)
-         value = nil
-         duration = Benchmark.realtime { value = block.call }
+         started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+         value = block.call
+         duration = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
          Rails.logger.info "[%.2fs] %s" % [duration, command]
          value
        end

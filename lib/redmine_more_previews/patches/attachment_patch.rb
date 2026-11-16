@@ -23,7 +23,17 @@
 module RedmineMorePreviews
   module Patches
     module AttachmentPatch
+      module DiskCleanup
+        private
+
+        def delete_from_disk!
+          super
+          FileUtils.rm_rf(preview_storagepath) if id.present?
+        end
+      end
+
       def self.included(base)
+        base.prepend DiskCleanup
         base.class_eval do
           
           ################################################################################
@@ -161,25 +171,7 @@ module RedmineMorePreviews
 #            File.join(preview_dirname(options.merge(:format => preview_format)), preview_filename(options) )
              File.join(preview_dirname(options.merge(:format => preview_format)), preview_assetname(options) )
          end #def
-          
-          ################################################################################
-          #
-          # overridden functions
-          #
-          ################################################################################
-          # class specific
-          def delete_from_disk!
-            if disk_filename.present? && File.exist?(diskfile)
-              File.delete(diskfile)
-            end
-            Dir[thumbnail_path("*")].each do |thumb|
-              File.delete(thumb)
-            end
-            if File.exist?( preview_storagepath )
-              FileUtils.rm_rf( preview_storagepath )
-            end
-          end #def
-          
+
         end #base
       end #self
        

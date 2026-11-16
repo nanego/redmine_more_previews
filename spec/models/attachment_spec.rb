@@ -24,4 +24,20 @@ describe Attachment do
       expect(create_attachment("trace.log", "content")).not_to be_preview_convertible
     end
   end
+
+  describe "#destroy" do
+    it "deletes the stored file, the core caches and the previews of the plugin" do
+      attachment = create_attachment("report.odt", "content")
+      core_cache = attachment.send(:thumbnail_path, "100")
+      FileUtils.mkdir_p([File.dirname(core_cache), attachment.preview_dirname])
+      File.write(core_cache, "thumbnail")
+      File.write(File.join(attachment.preview_dirname, "preview.pdf"), "preview")
+
+      attachment.destroy
+
+      expect(File.exist?(attachment.diskfile)).to be false
+      expect(File.exist?(core_cache)).to be false
+      expect(File.exist?(attachment.preview_storagepath)).to be false
+    end
+  end
 end

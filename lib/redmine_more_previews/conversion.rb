@@ -66,7 +66,7 @@ module RedmineMorePreviews
       self.id             = id.to_s
       self.name           = options[:name].to_s
       self.version        = options[:version].to_s
-      self.plugin_version = Redmine::Plugin.registered_plugins[:redmine_more_previews].version
+      self.plugin_version = Redmine::Plugin.registered_plugins[:redmine_more_previews]&.version
       
       self.converter      = RedmineMorePreviews::Converter.find(id)
       self.views          = converter.path.views
