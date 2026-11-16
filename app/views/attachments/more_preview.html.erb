@@ -12,7 +12,7 @@
       <%= call_hook(:preview_attachment_contextual, :attachment => @attachment, :project => @project ) %>
     </p>
   </div><div style="clear:both;"></div>
-  <%- case RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile) %>
+  <%- case RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile, name: @attachment.filename) %>
   <%- when "inline" %>
     <div id="preview_repository_entry_top">
       <%= call_hook(:preview_attachment_top, :attachment => @attachment, :project => @project, :params => request.query_parameters.merge(:format => "inline", :request => request).symbolize_keys ) %>
@@ -35,12 +35,12 @@
           ::Setting['plugin_redmine_more_previews']['absolute'].to_i > 0 ?
           more_preview_url(
             @attachment, 
-            RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile), 
+            RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile, name: @attachment.filename), 
             request.query_parameters
           ) :
           more_preview_path(
             @attachment, 
-            RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile), 
+            RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile, name: @attachment.filename), 
             request.query_parameters
           ), 
           :alt => @attachment.filename,
@@ -63,16 +63,16 @@
           ::Setting['plugin_redmine_more_previews']['absolute'].to_i > 0 ?
           more_preview_url(
             @attachment, 
-            RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile), 
+            RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile, name: @attachment.filename), 
             request.query_parameters
           ) :
           more_preview_path(
             @attachment, 
-            RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile), 
+            RedmineMorePreviews::Converter.conversion_ext(@attachment.diskfile, name: @attachment.filename), 
             request.query_parameters
           ), 
           @attachment.filename,
-         :type => RedmineMorePreviews::Converter.conversion_mime(@attachment.diskfile)
+         :type => RedmineMorePreviews::Converter.conversion_mime(@attachment.diskfile, name: @attachment.filename)
         ) %>
     </div>
   <% end %>

@@ -37,6 +37,7 @@ module RedmineMorePreviews
               diskfile, 
               preview_filepath(options),
               options.merge(
+                :name => filename,
                 :object => {:type => :attachment, :object => self},
                 :preview_format => preview_format
               ), 
@@ -50,6 +51,7 @@ module RedmineMorePreviews
               diskfile, 
               preview_assetpath(options),
               options.merge(
+                :name => filename,
                 :object => {:type => :attachment, :object => self},
                 :preview_format => preview_format
               ), 
@@ -58,7 +60,7 @@ module RedmineMorePreviews
           end #def
           
           def preview_convertible?
-            RedmineMorePreviews::Converter.convertible?(filename)
+            filesize.to_i > 0 && RedmineMorePreviews::Converter.convertible?(filename)
           end #def
           
           def preview_available?(options={})

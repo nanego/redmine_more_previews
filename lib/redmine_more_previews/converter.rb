@@ -230,16 +230,18 @@ module RedmineMorePreviews
     end #def
     
     def self.mime( filepath, options={} )
-    
+      # name: original filename when filepath is a stored file whose name may differ
+      name = options[:name].presence || File.basename(filepath)
+
       unless options[:pathonly]
       # try by file content
-      mime_type = Marcel::MimeType.for Pathname.new(filepath), name: File.basename(filepath)
+      mime_type = Marcel::MimeType.for Pathname.new(filepath), name: name
       mime      = active_mime_types.select{|m,opts| mime_type == opts["mime"] }.values.first if mime_type
       return mime if mime
       end
       
       # try by file extension
-      ext       = File.extname( filepath.downcase ).gsub(/\A\./,"")
+      ext       = File.extname( name.downcase ).gsub(/\A\./,"")
       mime      = active_mime_types[ext] if ext.present?
       return mime if mime
       
@@ -260,7 +262,7 @@ module RedmineMorePreviews
     end #def
     
     def self.convert( file, storage_path, options={}, &block )
-      worker = responsible( file )&.worker(options.merge(:target => storage_path))
+      worker = responsible( file, options.slice(:name) )&.worker(options.except(:name).merge(:target => storage_path))
       raise ConverterNotFound unless worker
       worker.preview( File.new(file), &block )
     end #def
