@@ -11,6 +11,19 @@ To preview files this plugin converts the previewed file content to either
 The appropriate conversion type(s) is/are up to the plugin developer. The available conversion option can be chosen on the plugin configuration page. 
 The plugin was developed with thread safety in mind. With caching enabled, it should stand even higher loads.
 
+## Test status
+
+| Plugin branch | Redmine Version | Test Status       |
+|---------------|-----------------|-------------------|
+| main          | 6.1.6           | [![6.1.6][2]][5]  |
+| main          | 7.0.3           | [![7.0.3][1]][5]  |
+| main          | master          | [![master][3]][5] |
+
+[1]: https://github.com/nanego/redmine_more_previews/actions/workflows/7_0_3.yml/badge.svg
+[2]: https://github.com/nanego/redmine_more_previews/actions/workflows/6_1_6.yml/badge.svg
+[3]: https://github.com/nanego/redmine_more_previews/actions/workflows/master.yml/badge.svg
+[5]: https://github.com/nanego/redmine_more_previews/actions
+
 Currently, there exist the following plugins:
 
 ---
