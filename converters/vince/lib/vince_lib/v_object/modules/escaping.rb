@@ -52,11 +52,7 @@ module VObject
       # escapes a string value from ,;: and \n
       #
       def esc_str(str)
-        str.to_s.to_utf8.
-        gsub(/,/, '\,').
-        gsub(/;/, '\;').
-        gsub(/:/, '\:').
-        gsub(/\n/, '\n')
+        str.to_s.to_utf8.gsub(/[\\,;:\n]/) { |c| c == "\n" ? "\\n" : "\\#{c}" }
       end #def
       
       # ----------------------------------------------------------------------------------
@@ -93,11 +89,7 @@ module VObject
       # unescapes a string value from \,\;\: and \n
       #
       def unesc_str(str)
-        str.to_s.to_utf8.
-        gsub(/\\,/, ',').
-        gsub(/\\;/, ';').
-        gsub(/\\:/, ':').
-        gsub(/\\n/, "\n") # last double quote!
+        str.to_s.to_utf8.gsub(/\\([\\,;:nN])/) { $1.casecmp?("n") ? "\n" : $1 }
       end #def
       
       # ----------------------------------------------------------------------------------
