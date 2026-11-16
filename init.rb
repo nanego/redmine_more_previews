@@ -126,7 +126,7 @@ Redmine::Plugin.register :redmine_more_previews do
   author       'Stephan Wenzel'
   description  'Preview various file types in redmine\'s preview pane'
   version      '5.0.9'
-  url          'https://github.com/HugoHasenbein/redmine_more_previews'
+  url          'https://github.com/nanego/redmine_more_previews'
   author_url   'https://github.com/HugoHasenbein/redmine_more_previews'
   
   requires_redmine(:version_or_higher => '4')
